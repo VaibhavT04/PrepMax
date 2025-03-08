@@ -27,7 +27,7 @@ export default function Navbar() {
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="font-heading text-2xl font-bold text-brand-primary">
-                Applically
+                PrepMax
               </span>
             </Link>
           </div>
