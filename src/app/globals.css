@@ -2,50 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --brand-primary: #4F46E5;
-  --brand-secondary: #818CF8;
-  --brand-accent: #C7D2FE;
-  --brand-dark: #2D3748;
-  --brand-light: #F7FAFC;
+/* Efficient animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 0.6s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s ease-out both;
+  }
 }
 
+/* Minimal, performance-focused keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add smooth scrolling but only for users who don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Base styles */
 @layer base {
+  body {
+    @apply bg-gray-50;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
+    @apply font-heading;
   }
 }
 
+/* Component styles */
 @layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ease-out;
+  }
+
   .btn-primary {
-    @apply bg-brand-primary hover:bg-brand-secondary text-white font-medium py-2 px-4 rounded-md transition-colors duration-200;
+    @apply px-4 py-2 bg-brand-primary text-white rounded-md
+      hover:bg-brand-secondary transform hover:scale-105
+      transition-all duration-300 ease-out;
   }
 
   .btn-secondary {
-    @apply bg-brand-accent hover:bg-brand-secondary/20 text-brand-primary font-medium py-2 px-4 rounded-md transition-colors duration-200;
-  }
-
-  .card {
-    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 p-6;
-  }
-
-  .section-title {
-    @apply font-heading text-3xl font-bold text-brand-dark mb-4;
-  }
-
-  .section-description {
-    @apply text-gray-600 text-lg mb-8;
+    @apply px-4 py-2 border border-brand-primary text-brand-primary rounded-md
+      hover:bg-brand-primary hover:text-white
+      transition-all duration-300 ease-out;
   }
 }

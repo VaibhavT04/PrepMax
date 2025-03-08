@@ -15,22 +15,17 @@ module.exports = {
           dark: "#2D3748",       // Dark text
           light: "#F7FAFC",      // Light background
         },
-        gray: {
-          50: "#F9FAFB",
-          100: "#F3F4F6",
-          200: "#E5E7EB",
-          300: "#D1D5DB",
-          400: "#9CA3AF",
-          500: "#6B7280",
-          600: "#4B5563",
-          700: "#374151",
-          800: "#1F2937",
-          900: "#111827",
-        },
       },
       fontFamily: {
         sans: ["var(--font-poppins)", "system-ui"],
         heading: ["var(--font-outfit)", "system-ui"],
+      },
+      transitionTimingFunction: {
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-out',
+        'fade-in-up': 'fadeInUp 0.5s ease-out',
       },
     },
   },

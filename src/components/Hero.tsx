@@ -2,6 +2,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { PricingDialog } from './PricingDialog'
 
+// ... existing code ...
+<Image
+  src="/hero-bg.jpg"  // Update this line with your image name
+  alt="Background"
+  fill
+  priority
+  className="object-cover object-center brightness-[0.8]"
+  quality={100}
+/>
+// ... existing code ...
+
+// ... existing code ...
 const features = [
   {
     title: 'Learning Roadmaps',
@@ -25,7 +37,7 @@ const features = [
   },
   {
     title: 'Interview Prep',
-    description: 'Practice with real interview questions',
+    description: 'Practice with real interview questions and mock interviews',
     icon: (props: any) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +57,7 @@ const features = [
   },
   {
     title: 'Resume Builder',
-    description: 'Create professional resumes easily',
+    description: 'Create professional resumes tailored for tech roles',
     icon: (props: any) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +77,7 @@ const features = [
   },
   {
     title: 'Progress Tracking',
-    description: 'Monitor your learning journey',
+    description: 'Monitor your learning journey with detailed analytics',
     icon: (props: any) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -88,29 +100,32 @@ const features = [
 export default function Hero() {
   return (
     <div className="relative isolate min-h-[calc(100vh-64px)]">
-      {/* Background with overlay */}
+      {/* Background with dark overlay */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/hero-bg.jpg"
           alt="Background"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center brightness-50" // Added brightness reduction
           quality={100}
         />
-        <div className="absolute inset-0 bg-brand-dark/75" />
+        {/* Multiple layers for better darkness control */}
+        <div className="absolute inset-0 bg-black/70" /> {/* Increased opacity from 75 to 80 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40" /> {/* Added gradient overlay */}
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-64px)]">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <div className="text-center">
-            <h1 className="font-heading text-4xl font-bold tracking-tight text-brand-light sm:text-6xl mb-6">
+            <h1 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-6xl mb-6 animate-fade-in">
               Your Complete Learning Journey
               <br />
               Starts Here
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-200 max-w-2xl mx-auto">
+            
+            <p className="mt-6 text-lg leading-8 text-gray-100 max-w-2xl mx-auto animate-fade-in-delay">
               Master programming languages, prepare for interviews, build your resume, 
               and track your progress - all in one place.
             </p>
@@ -120,38 +135,47 @@ export default function Hero() {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/20 transition-all duration-300"
+                  className="group bg-white/5 backdrop-blur-sm rounded-xl p-6 text-white 
+                    hover:bg-white/10 hover:transform hover:translate-y-[-4px] 
+                    transition-all duration-300 ease-out animate-fade-in-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  <feature.icon className="h-8 w-8 mb-4 text-brand-accent" />
+                  <feature.icon className="h-8 w-8 mb-4 text-brand-accent 
+                    group-hover:scale-110 transition-transform duration-300" />
                   <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-gray-300 text-sm">{feature.description}</p>
+                  <p className="text-gray-200 text-sm">{feature.description}</p>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center gap-x-6 animate-fade-in-up"
+                 style={{ animationDelay: '600ms' }}>
               <PricingDialog />
               <Link 
                 href="/roadmaps" 
-                className="text-sm font-medium text-brand-light hover:text-brand-accent transition-colors duration-200"
+                className="group text-sm font-medium text-white hover:text-brand-accent 
+                  transition-all duration-300 inline-flex items-center"
               >
-                Explore Roadmaps <span aria-hidden="true">→</span>
+                Explore Roadmaps 
+                <span aria-hidden="true" className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
+                  →
+                </span>
               </Link>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-            }}
-          />
-        </div>
+      {/* Decorative gradient */}
+      <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+        <div
+          className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+          style={{
+            clipPath:
+              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+          }}
+        />
       </div>
     </div>
   )
