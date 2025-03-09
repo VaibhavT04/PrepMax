@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { PricingDialog } from './PricingDialog'
 
-// ... existing code ...
 <Image
   src="/hero-bg.jpg"  // Update this line with your image name
   alt="Background"
