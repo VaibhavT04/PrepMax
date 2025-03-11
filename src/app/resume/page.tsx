@@ -41,7 +41,7 @@ export default function ResumePage() {
             Resume Builder
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            Create professional resumes that stand out
+            Create professional resumes that are ATS friendly which stand out
           </p>
         </div>
 
