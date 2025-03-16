@@ -10,9 +10,7 @@ import { PricingDialog } from './PricingDialog'
   className="object-cover object-center brightness-[0.8]"
   quality={100}
 />
-// ... existing code ...
 
-// ... existing code ...
 const features = [
   {
     title: 'Learning Roadmaps',
